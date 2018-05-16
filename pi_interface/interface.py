@@ -1,4 +1,6 @@
 import urllib3
+import numpy as np
+import pandas as pd
 from urllib3.exceptions import InsecureRequestWarning
 from osisoft.pidevclub.piwebapi.pi_web_api_client import PIWebApiClient
 from osisoft.pidevclub.piwebapi.models import PITimedValue
@@ -23,7 +25,7 @@ class PIInterface(PIWebApiClient):
         super().__init__(host, False, user, password, False)
 
     def get_values(self, assetserver, database, elements, attributes, start='*-7d', end='*'):
-        """This method returns an values according to given path.
+        """This method returns values according to given path.
         Args:
             assetserver (str): Asset server name.
             database (str): Database name.
@@ -53,7 +55,11 @@ class PIInterface(PIWebApiClient):
         for i, s in df.iterrows():
             item = PITimedValue()
             item.timestamp = i
-            item.value = s.values[0]
+            # Dtype of updating DataFrame cannot be integer
+            if issubclass(type(s.values[0]), np.integer):
+                item.value = float(s.values[0])
+            else:
+                item.value = s.values[0]
             item_list.append(item)
 
         response = super().stream.update_values_with_http_info(attribute.web_id, item_list, None, None)
