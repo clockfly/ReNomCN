@@ -4,6 +4,7 @@ import pandas as pd
 from urllib3.exceptions import InsecureRequestWarning
 from osisoft.pidevclub.piwebapi.pi_web_api_client import PIWebApiClient
 from osisoft.pidevclub.piwebapi.models import PITimedValue
+from functools import lru_cache
 
 # This is needed to avoid authentication error for self-signed certificate of PI AF
 urllib3.disable_warnings(InsecureRequestWarning)
@@ -37,7 +38,6 @@ class PIInterface(PIWebApiClient):
         """
         path = 'af:\\\\%s\\%s\\%s|%s' % (assetserver, database, '\\'.join(elements), '|'.join(attributes))
         response = self._get_plot_values(path, None, start, None, None, end, None)
-        print('test')
         df = response.set_index("Timestamp")[["Value"]]
         return df
 
@@ -51,6 +51,7 @@ class PIInterface(PIWebApiClient):
         df = super().data.convert_to_df(res.items, selected_fields)
         return df
 
+    @lru_cache(maxsize=None)
     def _convert_path_to_web_id(self, fullPath, request_timeout):
         system = fullPath[0:3]
         path = fullPath[3:None]
@@ -75,7 +76,7 @@ class PIInterface(PIWebApiClient):
             request_timeout(int): Timeout seconds.
         """
         path = '\\\\%s\\%s\\%s|%s' % (assetserver, database, '\\'.join(elements), '|'.join(attributes))
-        attribute = super().attribute.get_by_path(path, None, None)
+        attribute = super().attribute.get_by_path(path, None, None, _request_timeout=request_timeout)
         item_list = []
         for i, s in df.iterrows():
             item = PITimedValue()
