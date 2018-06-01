@@ -6,7 +6,7 @@ requires = [
 
 setup(
     install_requires=requires,
-    name="renom_pi",
+    name="renom_cn",
     version="0.0.1",
     packages=find_packages()
 )
