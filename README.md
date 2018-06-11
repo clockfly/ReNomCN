@@ -1,6 +1,16 @@
 # ReNomCN
 
-ReNomCN has a function of the interface of ReNom to various databases.
+ReNomCN is the interface of ReNom to various databases.
+
+# Connect to PI System
+## Overview
+PI System is a suite of software products such as database that are used for data collection as electric power collected by various resources.
+
+It can be used for analytics, visualization and shareing.
+
+Outline diagram of this system is shown below.
+
+![overview](static/img/overview.png)
 
 ## Install
 
