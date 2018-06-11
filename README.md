@@ -1,25 +1,30 @@
 # ReNomCN
 
 ReNomCN is the interface of ReNom to various databases.
+Current version(0.0.1) provides an data interface between PI system.
 
-# Connect to PI System
-## Overview
+**OSI soft- PIsystem** : https://www.osisoft.jp/pi-system/
+
+# Overview
+## Connect to PI System
+
 PI System is a suite of software products such as database that are used for data collection as electric power collected by various resources.
 
 It can be used for analytics, visualization and shareing.
 
+ReNomCN provides an interface between ReNomDL and PIsystem.
 Outline diagram of this system is shown below.
 
 ![overview](static/img/overview.png)
 
-## Install
+# Install
 
 ## Setup PISystem Environment
-If you want to use PI System interface, setup PIsystem environment following bellow url.
+If you want to use PI System interface, setup PIsystem environment following url.
 
 https://pisquare.osisoft.com/community/all-things-pi/japanese/japanpidevelopersclubkaihatsu
 
-Also, you need below settings.
+Also, you need some settings.
 
 - Create a new attributtion for prediction data which can be inserted future data.
 - Set PI Web API Server to accept HTTP POST request.
@@ -29,13 +34,13 @@ For more detail, see below url.
 
 
 ## Install from source
-For installing ReNomCN, download the repository from following url.
+For installing ReNomCN, download this repository using following command.
 
 `git clone https://gitlab.com/grid-devs/ReNomCN.git`
 
-Move into ReNomCN directory.
+Then move into ReNomCN directory.
 `cd ReNomCN`
 
-Then install all required packages.
+And install using following command.
 
 `python setup.py install`
