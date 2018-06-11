@@ -1,23 +1,25 @@
-# ReNomPI
+# ReNomCN
 
-ReNom PI is ReNom interface for PISystem
+ReNomCN has a function of the interface of ReNom to various databases.
 
 ## Install
 
 ## Setup PISystem Environment
-Setup PIsystem environment following bellow url.
+If you want to use PI System interface, setup PIsystem environment following bellow url.
 
 https://pisquare.osisoft.com/community/all-things-pi/japanese/japanpidevelopersclubkaihatsu
 
-Also, you need following settings.
+Also, you need below settings.
 
-- Create a new attributtion for prediction data which can be inserted future data and allow update.
-- Set PI Web API Server to accept from development environment which usually deny for CSRF.
-- Set PI Web API Server to accept HTTP POST request. 
-- Set Basic authentication for PI Web API Server.
+- Create a new attributtion for prediction data which can be inserted future data.
+- Set PI Web API Server to accept HTTP POST request.
+- Set Basic authentication to PI Web API Server.
+ 
+For more detail, see below url.
+
 
 ## Install from source
-For installing ReNomPI, download the repository from following url.
+For installing ReNomCN, download the repository from following url.
 
 `git clone https://gitlab.com/grid-devs/ReNomPI.git`
 

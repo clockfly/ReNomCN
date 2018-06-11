@@ -1,10 +1,9 @@
 import unittest
 from unittest import mock
-from pi_interface.interface import PIInterface
+from renom_cn.pi_interface.interface import PIInterface
 import pandas as pd
 import numpy as np
 from pandas.util.testing import assert_frame_equal
-from requests.exceptions import HTTPError
 from osisoft.pidevclub.piwebapi.rest import ApiException
 
 GET_PLOT_VALUES_PATH = 'osisoft.pidevclub.piwebapi.api.data_api.DataApi.get_plot_values'
