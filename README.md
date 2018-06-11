@@ -21,10 +21,10 @@ For more detail, see below url.
 ## Install from source
 For installing ReNomCN, download the repository from following url.
 
-`git clone https://gitlab.com/grid-devs/ReNomPI.git`
+`git clone https://gitlab.com/grid-devs/ReNomCN.git`
 
-Move into ReNomPI directory.
-`cd ReNomPI`
+Move into ReNomCN directory.
+`cd ReNomCN`
 
 Then install all required packages.
 
