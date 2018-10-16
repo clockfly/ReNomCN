@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, Grid
+# This file is distributed under the same license as the ReNomCN package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ReNomCN \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-16 10:34+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../index.rst:2
+msgid "ReNomCN"
+msgstr ""
+
+#: ../../index.rst:4
+msgid ""
+"ReNomCN is the interface of ReNom to various databases. Current "
+"version(0.0.1) provides an data interface between PI system."
+msgstr ""
+""
+
+#: ../../index.rst:7
+msgid "**OSI soft- PIsystem** : https://www.osisoft.jp/pi-system/"
+msgstr ""
+
+#: ../../index.rst:10
+msgid "Overview"
+msgstr ""
+
+#: ../../index.rst:12
+msgid "Connect to PI System"
+msgstr ""
+
+#: ../../index.rst:14
+msgid ""
+"PI System is a suite of software products such as database that are used "
+"for data collection as electric power collected by various resources."
+msgstr ""
+
+#: ../../index.rst:16
+msgid "It can be used for analytics, visualization and shareing."
+msgstr ""
+
+#: ../../index.rst:18
+msgid ""
+"ReNomCN provides an interface between ReNomDL and PIsystem. Outline "
+"diagram of this system is shown below."
+msgstr ""
+
+#: ../../index.rst:24
+msgid "Install"
+msgstr ""
+
+#: ../../index.rst:27
+msgid "Setup PISystem Environment"
+msgstr ""
+
+#: ../../index.rst:29
+msgid ""
+"If you want to use PI System interface, setup PIsystem environment "
+"following url."
+msgstr ""
+
+#: ../../index.rst:31
+msgid ""
+"https://pisquare.osisoft.com/community/all-things-"
+"pi/japanese/japanpidevelopersclubkaihatsu"
+msgstr ""
+
+#: ../../index.rst:33
+msgid "Also, you need some settings."
+msgstr ""
+
+#: ../../index.rst:35
+msgid ""
+"Create a new attributtion for prediction data which can be inserted "
+"future data."
+msgstr ""
+
+#: ../../index.rst:36
+msgid "Set PI Web API Server to accept HTTP POST request."
+msgstr ""
+
+#: ../../index.rst:37
+msgid "Set Basic authentication to PI Web API Server."
+msgstr ""
+
+#: ../../index.rst:39
+msgid "For more detail, see below url."
+msgstr ""
+
+#: ../../index.rst:43
+msgid "Install from source"
+msgstr ""
+
+#: ../../index.rst:45
+msgid "For installing ReNomCN, download this repository using following command."
+msgstr ""
+
+#: ../../index.rst:51
+msgid "Then move into ReNomCN directory."
+msgstr ""
+
+#: ../../index.rst:57
+msgid "And install using following command."
+msgstr ""
+

@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ReNomCN &mdash; ReNomCN  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ReNomCN  documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> ReNomCN
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">ReNomCN</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#connect-to-pi-system">Connect to PI System</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#install">Install</a><ul>
+<li><a class="reference internal" href="#setup-pisystem-environment">Setup PISystem Environment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#install-from-source">Install from source</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ReNomCN</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>ReNomCN</li>
+    
+    
+      <li class="switch_language_item"><a href="/index.html">English</a></li>
+      <li class="switch_language_item"><a href="/ja/index.html">日本語</a></li>
+
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+
+
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="renomcn">
+<h1>ReNomCN<a class="headerlink" href="#renomcn" title="Permalink to this headline">¶</a></h1>
+<p>ReNomCN is the interface of ReNom to various databases.
+Current version(0.0.1) provides an data interface between PI system.</p>
+<p><strong>OSI soft- PIsystem</strong> : <a class="reference external" href="https://www.osisoft.jp/pi-system/">https://www.osisoft.jp/pi-system/</a></p>
+</div>
+<div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="connect-to-pi-system">
+<h2>Connect to PI System<a class="headerlink" href="#connect-to-pi-system" title="Permalink to this headline">¶</a></h2>
+<p>PI System is a suite of software products such as database that are used for data collection as electric power collected by various resources.</p>
+<p>It can be used for analytics, visualization and shareing.</p>
+<p>ReNomCN provides an interface between ReNomDL and PIsystem.
+Outline diagram of this system is shown below.</p>
+<img alt="_images/overview.png" src="_images/overview.png" />
+</div>
+</div>
+<div class="section" id="install">
+<h1>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setup-pisystem-environment">
+<h2>Setup PISystem Environment<a class="headerlink" href="#setup-pisystem-environment" title="Permalink to this headline">¶</a></h2>
+<p>If you want to use PI System interface, setup PIsystem environment following url.</p>
+<p><a class="reference external" href="https://pisquare.osisoft.com/community/all-things-pi/japanese/japanpidevelopersclubkaihatsu">https://pisquare.osisoft.com/community/all-things-pi/japanese/japanpidevelopersclubkaihatsu</a></p>
+<p>Also, you need some settings.</p>
+<ul class="simple">
+<li>Create a new attributtion for prediction data which can be inserted future data.</li>
+<li>Set PI Web API Server to accept HTTP POST request.</li>
+<li>Set Basic authentication to PI Web API Server.</li>
+</ul>
+<p>For more detail, see below url.</p>
+</div>
+</div>
+<div class="section" id="install-from-source">
+<h1>Install from source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h1>
+<p>For installing ReNomCN, download this repository using following command.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://gitlab.com/grid-devs/ReNomCN.git
+</pre></div>
+</div>
+<p>Then move into ReNomCN directory.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ReNomCN
+</pre></div>
+</div>
+<p>And install using following command.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python setup.py install
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Grid.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
