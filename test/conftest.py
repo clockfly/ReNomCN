@@ -5,7 +5,7 @@ import pytest
 
 def compose_up():
     subprocess.call(["docker-compose", "up", "-d"])
-    time.sleep(15)
+    time.sleep(20)
 
 
 def compose_down():

@@ -1,12 +1,11 @@
 from setuptools import find_packages, setup
 
-requires = [
-    "numpy", "pandas", "osisoft.pidevclub.piwebapi"
-]
+with open("requirements.txt") as reader:
+    requires = [line for line in reader.readlines()]
 
 setup(
     install_requires=requires,
     name="renom_cn",
-    version="0.0.1",
+    version="0.0b1",
     packages=find_packages()
 )
