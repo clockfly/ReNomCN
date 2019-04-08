@@ -15,6 +15,6 @@ def compose_down():
 
 @pytest.fixture(scope='session', autouse=True)
 def scope_class():
-    compose_up()
+    # compose_up()
     yield
-    compose_down()
+    # compose_down()
