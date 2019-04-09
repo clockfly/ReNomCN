@@ -9,3 +9,4 @@ PyMySQL==0.9.3
 s3fs==0.2.0
 SQLAlchemy==1.2.15
 pyarrow==0.12.1
+xmltodict==0.12.0

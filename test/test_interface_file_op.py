@@ -1,6 +1,9 @@
 import os
+import numpy as np
+from numpy.testing import assert_array_equal
 import pandas as pd
 from pandas.util.testing import assert_frame_equal
+import PIL.Image
 
 from renom_cn.interface import file_operator
 
@@ -61,3 +64,67 @@ class TestPickleReadWrite(object):
     def test_read(self):
         data = self.rw.read(self.path)
         assert_frame_equal(data, test_df)
+
+
+test_dict = {
+    "test": {"key1": "val1", "key2": "val2"}
+}
+
+
+class TestJsonReadWrite(object):
+    @classmethod
+    def setup_class(self):
+        self.path = "files/data.json"
+        self.rw = file_operator.JsonReadWrite(fstype="local")
+
+    @classmethod
+    def teardown_class(self):
+        os.remove(self.path)
+
+    def test_write(self):
+        self.rw.write(self.path, test_dict)
+
+    def test_read(self):
+        data = self.rw.read(self.path)
+        assert data == test_dict
+
+
+class TestXmlReadWrite(object):
+    @classmethod
+    def setup_class(self):
+        self.path = "files/data.xml"
+        self.rw = file_operator.XmlReadWrite(fstype="local")
+
+    @classmethod
+    def teardown_class(self):
+        os.remove(self.path)
+
+    def test_write(self):
+        self.rw.write(self.path, test_dict)
+
+    def test_read(self):
+        data = self.rw.read(self.path)
+        assert data == test_dict
+
+
+test_img_array = np.random.randint(0, 255, (128, 128, 3)).astype(np.uint8)
+test_img = PIL.Image.fromarray(np.uint8(test_img_array))
+
+
+class TestImageReadWrite(object):
+    @classmethod
+    def setup_class(self):
+        self.path = "files/data.png"
+        self.rw = file_operator.ImageReadWrite(fstype="local")
+
+    @classmethod
+    def teardown_class(self):
+        os.remove(self.path)
+
+    def test_write(self):
+        self.rw.write(self.path, test_img, "png")
+
+    def test_read(self):
+        data = self.rw.read(self.path)
+        data_array = np.array(data)
+        assert_array_equal(data_array, test_img_array)
