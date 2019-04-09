@@ -6,7 +6,9 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 
 class Connector(with_metaclass(ABCMeta, object)):
-    """Abstract class of db connector with sqlalchemy."""
+    """
+    Abstract class of db connector with sqlalchemy.
+    """
 
     def __init__(self):
         self.initurl()
@@ -18,6 +20,9 @@ class Connector(with_metaclass(ABCMeta, object)):
         pass
 
     def initengine(self):
+        """
+        initialize engine.
+        """
         self._engine = create_engine(self.url, echo=False)
 
     @property
@@ -25,6 +30,9 @@ class Connector(with_metaclass(ABCMeta, object)):
         return self._engine
 
     def initsession(self):
+        """
+        initialize session.
+        """
         self._session = scoped_session(sessionmaker(bind=self._engine))
 
     @property
@@ -32,31 +40,104 @@ class Connector(with_metaclass(ABCMeta, object)):
         return self._session
 
     def get_all(self, obj):
+        """
+        Get all object.
+
+        Parameters
+        ----------
+            obj : Table class object.
+
+        Returns
+        -------
+            result of .all() query.
+        """
         return self.session().query(obj).all()
 
     def insert(self, obj):
+        """
+        Insert object.
+
+        Parameters
+        ----------
+            obj : Table class object.
+
+        Returns
+        -------
+            obj : inserted object.
+        """
         self.session().add(obj)
         self.session().commit()
         return obj
 
     def update(self, obj):
+        """
+        Update object. Same with insert function.
+
+        Parameters
+        ----------
+            obj : Table class object.
+
+        Returns
+        -------
+            obj : inserted object.
+        """
         self.insert(obj)
 
 
 class SQLiteConnector(Connector):
+    """
+    Connector for SQLite.
+    """
+
     def __init__(self, host="", database=":memory:"):
-        self.is_type = "sqlite"
+        """
+        initialize.
+
+        Parameters
+        ----------
+            host : string, default "".
+                hostname of DB server.
+
+            database : string, default ":memory:".
+                database name.
+        """
         self.host = host
         self.database = database
         super(SQLiteConnector, self).__init__()
 
     def initurl(self):
+        """
+        initialize url.
+        """
         self.url = "sqlite://{}/{}".format(self.host, self.database)
 
 
 class MySQLConnector(Connector):
+    """
+    Connector for MySQL.
+    """
+
     def __init__(self, host, port, user, password, database):
-        self.is_type = "mysql"
+        """
+        initialize.
+
+        Parameters
+        ----------
+            host : string.
+                hostname of DB server.
+
+            port : string.
+                port number.
+
+            user : string.
+                user name of database.
+
+            password : string.
+                password.
+
+            database : string.
+                database name.
+        """
         self.host = host
         self.port = port
         self.user = user
@@ -65,6 +146,9 @@ class MySQLConnector(Connector):
         super(MySQLConnector, self).__init__()
 
     def initurl(self):
+        """
+        initialize url.
+        """
         self.url = "mysql+pymysql://{}:{}@{}:{}/{}".format(self.user,
                                                            self.password,
                                                            self.host,
@@ -73,8 +157,30 @@ class MySQLConnector(Connector):
 
 
 class PostgreSQLConnector(Connector):
+    """
+    Connector for PostgreSQL.
+    """
     def __init__(self, host, port, user, password, database):
-        self.is_type = "postgresql"
+        """
+        initialize.
+
+        Parameters
+        ----------
+            host : string.
+                hostname of DB server.
+
+            port : string.
+                port number.
+
+            user : string.
+                user name of database.
+
+            password : string.
+                password.
+
+            database : string.
+                database name.
+        """
         self.host = host
         self.port = port
         self.user = user
@@ -83,6 +189,9 @@ class PostgreSQLConnector(Connector):
         super(PostgreSQLConnector, self).__init__()
 
     def initurl(self):
+        """
+        initialize url.
+        """
         self.url = "postgresql://{}:{}@{}:{}/{}".format(self.user,
                                                         self.password,
                                                         self.host,

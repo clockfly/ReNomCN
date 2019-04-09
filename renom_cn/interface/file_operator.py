@@ -16,7 +16,19 @@ from renom_cn.interface import filesystem
 
 
 class ReadWriteBase(with_metaclass(ABCMeta, object)):
+    """
+    Abstract class of file read/write module.
+    """
+
     def __init__(self, fstype="local"):
+        """
+        initialize.
+
+        Parameters
+        ----------
+            fstype : string, default "local".
+                type of filesystem.
+        """
         self.fs = filesystem.get_fs(fstype)
 
     @abstractmethod
@@ -30,32 +42,82 @@ class ReadWriteBase(with_metaclass(ABCMeta, object)):
 
 # Pandas to File
 class ParquetReadWrite(ReadWriteBase):
+    """
+    Class of Parquet file read/write module.
+    """
+
     def __init__(self, fstype="local"):
         super(ParquetReadWrite, self).__init__(fstype)
 
     def read(self, path):
-        """paquet to pandas"""
+        """
+        read parquet file.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+        Returns
+        -------
+            data : pandas.DataFrame.
+        """
         table = self.fs.read_parquet(path=path)
         return table.to_pandas()
 
     def write(self, path, data):
-        """pandas to parquet"""
+        """
+        Write pandas DataFrame to Parquet file.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+            data: pandas.DataFrame.
+                file data.
+        """
         table = pa.Table.from_pandas(data)
         pq.write_table(table, path, filesystem=self.fs)
 
 
 class CSVReadWrite(ReadWriteBase):
+    """
+    Class of csv file read/write module.
+    """
+
     def __init__(self, fstype="local"):
         super(CSVReadWrite, self).__init__(fstype)
 
     def read(self, path):
-        """csv to pandas"""
+        """
+        read csv file.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+        Returns
+        -------
+            data : pandas.DataFrame.
+        """
         with self.fs.open(path, mode='r') as f:
             data = pd.read_csv(StringIO(f.read()))
         return data
 
     def write(self, path, data):
-        """pandas to csv"""
+        """
+        Write pandas DataFrame to csv file.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+            data: pandas.DataFrame.
+                file data.
+        """
         with self.fs.open(path, mode='w') as f:
             s = StringIO()
             data.to_csv(s, index=False)
@@ -67,13 +129,34 @@ class PickleReadWrite(ReadWriteBase):
         super(PickleReadWrite, self).__init__(fstype)
 
     def read(self, path):
-        """pickle to pandas"""
+        """
+        read pickle file.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+        Returns
+        -------
+            data : pandas.DataFrame.
+        """
         with self.fs.open(path, mode='rb') as f:
             data = pickle.load(f)
         return data
 
     def write(self, path, data):
-        """pandas to pickle"""
+        """
+        Write pandas DataFrame to pickle file.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+            data: pandas.DataFrame.
+                file data.
+        """
         with self.fs.open(path, mode='wb') as f:
             pickle.dump(data, f)
 
@@ -84,13 +167,34 @@ class JsonReadWrite(ReadWriteBase):
         super(JsonReadWrite, self).__init__(fstype)
 
     def read(self, path):
-        """json to dict"""
+        """
+        read json file to dict.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+        Returns
+        -------
+            data : dict.
+        """
         with self.fs.open(path, 'r') as f:
             data = json.load(f)
         return data
 
     def write(self, path, data):
-        """dict to json"""
+        """
+        write json file from dict.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+            data: dict.
+                dict of json data.
+        """
         with self.fs.open(path, 'w') as f:
             f.write(json.dumps(data))
 
@@ -100,13 +204,34 @@ class XmlReadWrite(ReadWriteBase):
         super(XmlReadWrite, self).__init__(fstype)
 
     def read(self, path):
-        """xml to dict"""
+        """
+        read xml file to dict.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+        Returns
+        -------
+            data : dict.
+        """
         with self.fs.open(path, "rb") as f:
             d = xmltodict.parse(f, xml_attribs=True)
         return d
 
     def write(self, path, data):
-        """dict to xml"""
+        """
+        write xml file from dict.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+            data: dict.
+                dict of xml data.
+        """
         xmlstr = xmltodict.unparse(data, pretty=True)
         with self.fs.open(path, 'w') as f:
             f.write(xmlstr)
@@ -118,13 +243,40 @@ class ImageReadWrite(ReadWriteBase):
         super(ImageReadWrite, self).__init__(fstype)
 
     def read(self, path):
+        """
+        read img file to PIL.Image.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+        Returns
+        -------
+            img : PIL.Image.
+        """
         with self.fs.open(path, mode='rb') as f:
             data = f.read()
         img = PIL.Image.open(BytesIO(data))
         return img
 
-    def write(self, path, img, extensions):
+    def write(self, path, img, extension):
+        """
+        write img file from PIL.Image.
+
+        Parameters
+        ----------
+            path : string.
+                filepath.
+
+            img : PIL.Image.
+                image object.
+
+            extension : string.
+                file extension.
+
+        """
         with self.fs.open(path, mode='wb') as f:
             b = BytesIO()
-            img.save(b, extensions)
+            img.save(b, extension)
             f.write(b.getvalue())
