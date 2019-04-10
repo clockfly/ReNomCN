@@ -87,14 +87,8 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">ReNomCN</a></li>
-<li><a class="reference internal" href="#overview">Overview</a><ul>
-<li><a class="reference internal" href="#connect-to-pi-system">Connect to PI System</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#install">Install</a><ul>
-<li><a class="reference internal" href="#setup-pisystem-environment">Setup PISystem Environment</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#install-from-package">Install from package</a></li>
 <li><a class="reference internal" href="#install-from-source">Install from source</a></li>
 </ul>
 </div>
@@ -166,40 +160,31 @@
             
   <div class="section" id="renomcn">
 <h1>ReNomCN<a class="headerlink" href="#renomcn" title="Permalink to this headline">¶</a></h1>
-<p>ReNomCN is the interface of ReNom to various databases.
-Current version(0.0.1) provides an data interface between PI system.</p>
-<p><strong>OSI soft- PIsystem</strong> : <a class="reference external" href="https://www.osisoft.jp/pi-system/">https://www.osisoft.jp/pi-system/</a></p>
-</div>
-<div class="section" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="connect-to-pi-system">
-<h2>Connect to PI System<a class="headerlink" href="#connect-to-pi-system" title="Permalink to this headline">¶</a></h2>
-<p>PI System is a suite of software products such as database that are used for data collection as electric power collected by various resources.</p>
-<p>It can be used for analytics, visualization and shareing.</p>
-<p>ReNomCN provides an interface between ReNomDL and PIsystem.
-Outline diagram of this system is shown below.</p>
-<img alt="_images/overview.png" src="_images/overview.png" />
-</div>
+<p>ReNomCN is a basic modules for ReNom web applications.</p>
+<p>Version 0.0.1 beta contains following modules.</p>
+<ul class="simple">
+<li>Database connection modules.</li>
+<li>Filesystem module.</li>
+<li>File read/write modules.</li>
+</ul>
 </div>
 <div class="section" id="install">
 <h1>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="setup-pisystem-environment">
-<h2>Setup PISystem Environment<a class="headerlink" href="#setup-pisystem-environment" title="Permalink to this headline">¶</a></h2>
-<p>If you want to use PI System interface, setup PIsystem environment following url.</p>
-<p><a class="reference external" href="https://pisquare.osisoft.com/community/all-things-pi/japanese/japanpidevelopersclubkaihatsu">https://pisquare.osisoft.com/community/all-things-pi/japanese/japanpidevelopersclubkaihatsu</a></p>
-<p>Also, you need some settings.</p>
-<ul class="simple">
-<li>Create a new attributtion for prediction data which can be inserted future data.</li>
-<li>Set PI Web API Server to accept HTTP POST request.</li>
-<li>Set Basic authentication to PI Web API Server.</li>
-</ul>
-<p>For more detail, see below url.</p>
 </div>
+<div class="section" id="install-from-package">
+<h1>Install from package<a class="headerlink" href="#install-from-package" title="Permalink to this headline">¶</a></h1>
+<p>Linux user can install ReNomCN from Wheel package.</p>
+<p>Other os user can’t install from Wheel package but can install from source.</p>
+<p>The Wheel package is provided at:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install https://grid-devs.gitlab.io/ReNomCN/bin/renom_cn-VERSION-py3-none-any.whl
+</pre></div>
+</div>
+<p>(VERSION is stands for actual version number e.g. 0.0b1)</p>
 </div>
 <div class="section" id="install-from-source">
 <h1>Install from source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h1>
 <p>For installing ReNomCN, download this repository using following command.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://gitlab.com/grid-devs/ReNomCN.git
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/ReNom-dev-team/ReNomCN.git
 </pre></div>
 </div>
 <p>Then move into ReNomCN directory.</p>
@@ -207,7 +192,7 @@ Outline diagram of this system is shown below.</p>
 </pre></div>
 </div>
 <p>And install using following command.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python setup.py install
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install -e .
 </pre></div>
 </div>
 </div>

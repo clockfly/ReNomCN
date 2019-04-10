@@ -21,6 +21,16 @@ before_script:
 #     - cd test
 #     - pytest
 
+build_doc:
+  script:
+    - pip3 install sphinx==1.7.6 sphinx-intl==0.9.9 sphinxcontrib-versioning==2.2.1
+    - cd doc
+    - sh build.sh
+
+  artifacts:
+    paths:
+    - doc/_build/
+
 pages:
   variables:
     VERSION: "test"

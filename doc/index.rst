@@ -1,7 +1,7 @@
 ReNomCN
 =======
 
-ReNomCN is a basic modules for ReNom applications.
+ReNomCN is a basic modules for ReNom web applications.
 
 Version 0.0.1 beta contains following modules.
 
@@ -11,7 +11,6 @@ Version 0.0.1 beta contains following modules.
 
 Install
 ========
-
 
 Install from package
 ====================
