@@ -33,7 +33,7 @@ packages:
 
   artifacts:
     paths:
-    - public/$VERSION/
+    - public
 
   # only:
   #   - /^release\/.*$/
