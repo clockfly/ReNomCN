@@ -23,7 +23,7 @@ before_script:
 
 pages:
   variables:
-    VERSION: "0.0b1"
+    VERSION: "test"
 
   script:
     - python3 setup.py bdist_wheel
