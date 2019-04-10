@@ -11,24 +11,29 @@ before_script:
   - cd ReNomCN
   - pip3 install -e .
 
-flake8:
-  script:
-    - flake8
+# flake8:
+#   script:
+#     - flake8
 
-pytest:
-  script:
-    - pytest
+# pytest:
+#   script:
+#     - mkdir test/files
+#     - cd test
+#     - pytest
 
 packages:
+  variables:
+    VERSION: "0.0b1"
+
   script:
     - python3 setup.py bdist_wheel
-    - mkdir -p public/$CI_COMMIT_TAG/bin
-    - cp dist/* public/$CI_COMMIT_TAG/bin
-    - ls public/$CI_COMMIT_TAG/bin
+    - mkdir -p public/$VERSION/bin
+    - cp dist/* public/$VERSION/bin
+    - ls public/$VERSION/bin
 
   artifacts:
     paths:
-    - public/$CI_COMMIT_TAG/
+    - public/$VERSION/
 
   # only:
   #   - /^release\/.*$/
