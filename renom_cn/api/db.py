@@ -151,7 +151,8 @@ class MySQLConnector(Connector):
         ...     id = Column(Integer, primary_key=True, autoincrement=True)
         ...     name = Column(TEXT)
         ...
-        >>> conn = MySQLConnector(host="localhost", port="3306", user="testuser", password="testpassword", database="testdb")
+        >>> conn = MySQLConnector(host="localhost", port="3306",
+        ...                       user="testuser", password="testpassword", database="testdb")
         >>> Base.metadata.create_all(bind=conn.engine)
         >>> data = Test(name="test1")
         >>> conn.insert(data)
@@ -216,7 +217,8 @@ class PostgreSQLConnector(Connector):
         ...     id = Column(Integer, primary_key=True, autoincrement=True)
         ...     name = Column(TEXT)
         ...
-        >>> conn = PostgreSQLConnector(host="localhost", port="5432", user="testuser", password="testpassword", database="testdb")
+        >>> conn = PostgreSQLConnector(host="localhost", port="5432",
+        ...                            user="testuser", password="testpassword", database="testdb")
         >>> Base.metadata.create_all(bind=conn.engine)
         >>> data = Test(name="test1")
         >>> conn.insert(data)
