@@ -1,6 +1,6 @@
 import pyarrow.filesystem as pafs
 
-from renom_cn.interface import filesystem
+from renom_cn.api import filesystem
 
 
 def test_fs_local():

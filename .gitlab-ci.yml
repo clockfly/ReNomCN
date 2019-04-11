@@ -1,0 +1,46 @@
+image: ubuntu:16.04
+
+before_script:
+  - apt-get update
+  - apt-get install -y python3 python3-tk python3-pip curl git
+  - pip3 install pytest wheel flake8
+  - cd ..
+  - git clone https://github.com/ReNom-dev-team/ReNom.git
+  - pip3 install numpy
+  - pip3 install -r ReNom/requirements.txt
+  - cd ReNomCN
+  - pip3 install -e .
+
+# flake8:
+#   script:
+#     - flake8
+
+# pytest:
+#   script:
+#     - mkdir test/files
+#     - cd test
+#     - pytest
+
+# build_doc:
+#   script:
+#     - pip3 install sphinx==1.7.6 sphinx-intl==0.9.9 sphinxcontrib-versioning==2.2.1
+#     - cd doc
+#     - sh build.sh
+#
+#   artifacts:
+#     paths:
+#     - doc/_build/
+
+pages:
+  script:
+    - python3 setup.py bdist_wheel
+    - mkdir -p public//bin
+    - cp dist/* public/bin
+    - ls public/bin
+
+  artifacts:
+    paths:
+    - public
+
+  only:
+    - /^release\/.*$/

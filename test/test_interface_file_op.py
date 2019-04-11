@@ -5,7 +5,7 @@ import pandas as pd
 from pandas.util.testing import assert_frame_equal
 import PIL.Image
 
-from renom_cn.interface import file_operator
+from renom_cn.api import file_operator
 
 
 test_data = {"col1": [1, 2], "col2": [3, 4]}
