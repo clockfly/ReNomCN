@@ -1,7 +1,7 @@
-from renom_cn.interface import db
-
 from sqlalchemy import Column, Integer, TEXT
 from sqlalchemy.ext.declarative import declarative_base
+
+from renom_cn.api import db
 
 
 Base = declarative_base()
