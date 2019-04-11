@@ -24,7 +24,7 @@ class ReadWriteBase(with_metaclass(ABCMeta, object)):
         """
         initialize filesystem attribute.
 
-        Args::
+        Args:
             fstype : string, default "local".
                 type of filesystem.
         """
@@ -48,7 +48,6 @@ class ParquetReadWrite(ReadWriteBase):
         >>> import os
         >>> import pandas as pd
         >>> from renom_cn.api.file_operator import ParquetReadWrite
-        >>>
         >>> test_data = {"col1": [1, 2], "col2": [3, 4]}
         >>> test_df = pd.DataFrame(data=test_data)
         >>> test_df
@@ -64,7 +63,7 @@ class ParquetReadWrite(ReadWriteBase):
            col1  col2
         0     1     3
         1     2     4
-        >>> os.remove(filepath)
+        >>> rw.fs.rm(filepath)
         >>> os.path.exists(filepath)
         False
     """
@@ -122,7 +121,7 @@ class CSVReadWrite(ReadWriteBase):
         0     1     3
         1     2     4
         >>> rw = CSVReadWrite(fstype="local")
-        >>> filepath = "/tmp/data.parquet"
+        >>> filepath = "/tmp/data.csv"
         >>> rw.write(filepath, test_df)
         >>> os.path.exists(filepath)
         True
@@ -130,12 +129,19 @@ class CSVReadWrite(ReadWriteBase):
            col1  col2
         0     1     3
         1     2     4
-        >>> os.remove(filepath)
+        >>> rw.fs.rm(filepath)
         >>> os.path.exists(filepath)
         False
     """
 
     def __init__(self, fstype="local"):
+        """
+        initialize filesystem attribute.
+
+        Args:
+            fstype : string, default "local".
+                type of filesystem.
+        """
         super(CSVReadWrite, self).__init__(fstype)
 
     def read(self, path):
@@ -170,7 +176,40 @@ class CSVReadWrite(ReadWriteBase):
 
 
 class PickleReadWrite(ReadWriteBase):
+    """
+    Class of pickle file read/write module.
+
+    Examples:
+        >>> import os
+        >>> import pandas as pd
+        >>> from renom_cn.api.file_operator import PickleReadWrite
+        >>> test_data = {"col1": [1, 2], "col2": [3, 4]}
+        >>> test_df = pd.DataFrame(data=test_data)
+        >>> test_df
+           col1  col2
+        0     1     3
+        1     2     4
+        >>> rw = PickleReadWrite(fstype="local")
+        >>> filepath = "/tmp/data.pickle"
+        >>> rw.write(filepath, test_df)
+        >>> os.path.exists(filepath)
+        True
+        >>> rw.read(filepath)
+           col1  col2
+        0     1     3
+        1     2     4
+        >>> rw.fs.rm(filepath)
+        >>> os.path.exists(filepath)
+        False
+    """
     def __init__(self, fstype="local"):
+        """
+        initialize filesystem attribute.
+
+        Args:
+            fstype : string, default "local".
+                type of filesystem.
+        """
         super(PickleReadWrite, self).__init__(fstype)
 
     def read(self, path):
@@ -197,7 +236,6 @@ class PickleReadWrite(ReadWriteBase):
                 filepath.
 
             data: pandas.DataFrame.
-                file data.
         """
         with self.fs.open(path, mode='wb') as f:
             pickle.dump(data, f)
@@ -205,7 +243,32 @@ class PickleReadWrite(ReadWriteBase):
 
 # Dict to File
 class JsonReadWrite(ReadWriteBase):
+    """
+    Class of json file read/write module.
+
+    Examples:
+        >>> import os
+        >>> from renom_cn.api.file_operator import JsonReadWrite
+        >>> test_dict = {"test": {"key1": "val1", "key2": "val2"} }
+        >>> rw = JsonReadWrite(fstype="local")
+        >>> filepath = "/tmp/data.json"
+        >>> rw.write(filepath, test_dict)
+        >>> os.path.exists(filepath)
+        True
+        >>> rw.read(filepath)
+        {'test': {'key1': 'val1', 'key2': 'val2'}}
+        >>> rw.fs.rm(filepath)
+        >>> os.path.exists(filepath)
+        False
+    """
     def __init__(self, fstype="local"):
+        """
+        initialize filesystem attribute.
+
+        Args:
+            fstype : string, default "local".
+                type of filesystem.
+        """
         super(JsonReadWrite, self).__init__(fstype)
 
     def read(self, path):
@@ -239,7 +302,32 @@ class JsonReadWrite(ReadWriteBase):
 
 
 class XmlReadWrite(ReadWriteBase):
+    """
+    Class of xml file read/write module.
+
+    Examples:
+        >>> import os
+        >>> from renom_cn.api.file_operator import XmlReadWrite
+        >>> test_dict = {"test": {"key1": "val1", "key2": "val2"} }
+        >>> rw = XmlReadWrite(fstype="local")
+        >>> filepath = "/tmp/data.xml"
+        >>> rw.write(filepath, test_dict)
+        >>> os.path.exists(filepath)
+        True
+        >>> rw.read(filepath)
+        OrderedDict([('test', OrderedDict([('key1', 'val1'), ('key2', 'val2')]))])
+        >>> rw.fs.rm(filepath)
+        >>> os.path.exists(filepath)
+        False
+    """
     def __init__(self, fstype="local"):
+        """
+        initialize filesystem attribute.
+
+        Args:
+            fstype : string, default "local".
+                type of filesystem.
+        """
         super(XmlReadWrite, self).__init__(fstype)
 
     def read(self, path):
@@ -265,8 +353,8 @@ class XmlReadWrite(ReadWriteBase):
             path : string.
                 filepath.
 
-            data: dict.
-                dict of xml data.
+            data: OrderedDict.
+                OrderedDict of xml data.
         """
         xmlstr = xmltodict.unparse(data, pretty=True)
         with self.fs.open(path, 'w') as f:
@@ -275,7 +363,35 @@ class XmlReadWrite(ReadWriteBase):
 
 # PIL.Image to File
 class ImageReadWrite(ReadWriteBase):
+    """
+    Class of image file read/write module.
+
+    Examples:
+        >>> import os
+        >>> import numpy as np
+        >>> import PIL.Image
+        >>> from renom_cn.api.file_operator import ImageReadWrite
+        >>> test_img_array = np.random.randint(0, 255, (128, 128, 3)).astype(np.uint8)
+        >>> test_img = PIL.Image.fromarray(np.uint8(test_img_array))
+        >>> rw = ImageReadWrite(fstype="local")
+        >>> filepath = "/tmp/data.png"
+        >>> rw.write(filepath, test_img, "png")
+        >>> os.path.exists(filepath)
+        True
+        >>> rw.read(filepath)
+        <PIL.PngImagePlugin.PngImageFile image mode=RGB size=128x128 at 0x11314F240>
+        >>> rw.fs.rm(filepath)
+        >>> os.path.exists(filepath)
+        False
+    """
     def __init__(self, fstype="local"):
+        """
+        initialize filesystem attribute.
+
+        Args:
+            fstype : string, default "local".
+                type of filesystem.
+        """
         super(ImageReadWrite, self).__init__(fstype)
 
     def read(self, path):

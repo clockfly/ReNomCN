@@ -1,5 +1,24 @@
+import os
+import types
+
+import boto3
 import s3fs
 import pyarrow.filesystem as pafs
+
+
+def rm(self, path):
+    os.remove(path)
+
+
+def s3mkdir(self, path):
+    splitted_path = path.split("/")
+    bucket_name = splitted_path[0]
+    dirpath = "/".join(splitted_path[1:])
+    dirpath = dirpath + "/"
+
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(bucket_name)
+    bucket.put_object(Key=dirpath)
 
 
 def get_fs(type="local"):
@@ -27,22 +46,29 @@ def get_fs(type="local"):
         False
         >>> fs.isdir("./testdir")
         True
+        >>> fs.rm("./a.txt")
 
         >>> fs = get_fs(type="s3")
-        >>> fs.ls("grid-cntest")
-        ['grid-cntest/testdir']
-        >>> with fs.open('grid-cntest/testdir/a.txt', 'wb') as f:
+        >>> fs.ls("my-bucket")
+        FileNotFoundError: my-bucket  # if bucket is empty, raise FileNotFoundError
+        >>> fs.mkdir("my-bucket/testdir")
+        >>> fs.ls("my-bucket")
+        ['my-bucket/testdir']
+        >>> with fs.open('my-bucket/testdir/a.txt', 'wb') as f:
         ...     f.write(b"hello")
         ...
         5
-        >>> with fs.open('grid-cntest/testdir/a.txt', 'rb') as f:
+        >>> with fs.open('my-bucket/testdir/a.txt', 'rb') as f:
         ...     print(f.read())
         ...
         b'hello'
-        >>>
+        >>> fs.rm('my-bucket/testdir/a.txt')
     """
     if type == "s3":
-        fs = s3fs.S3FileSystem(anon=False)
-        return pafs.S3FSWrapper(fs=fs)
+        tmpfs = s3fs.S3FileSystem(anon=False)
+        fs = pafs.S3FSWrapper(fs=tmpfs)
+        fs.mkdir = types.MethodType(s3mkdir, fs)
     else:
-        return pafs.LocalFileSystem()
+        fs = pafs.LocalFileSystem()
+        fs.rm = types.MethodType(rm, fs)
+    return fs
